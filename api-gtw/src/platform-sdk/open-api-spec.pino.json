@@ -1,0 +1,1 @@
+{"openapi":"3.0.0","paths":{"/services/pino/functions/createBooking":{"post":{"operationId":"createBooking","parameters":[],"responses":{"201":{"description":""}},"tags":["Pino"]}}},"info":{"title":"pino service API  Docs ","description":"","version":"1.0","contact":{}},"tags":[],"servers":[],"components":{"schemas":{}}}
