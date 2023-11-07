@@ -8,7 +8,8 @@ const array = [];
 //If env === development, uses nest js default logger
 //Else, pino logger overrides the default logger
 
-const serviceName = process.env.SERVICE_NAME || 'DefaultServiceName';
+const { name: serviceName } = require('../package.json');
+
 if (process.env.NODE_ENV !== 'development') {
   array.push(
     LoggerModule.forRoot({
