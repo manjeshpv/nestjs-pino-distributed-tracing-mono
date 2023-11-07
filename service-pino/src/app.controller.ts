@@ -15,4 +15,10 @@ export class AppController {
     //this.logger.log(new Date(), '');
     return this.appService.getHello();
   }
+  @Get('/functions/getBooking')
+  getBooking(@Headers() headers) {
+    console.log(headers);
+    this.logger.log(new Date(), 'manjesh');
+    return this.appService.getHello();
+  }
 }
