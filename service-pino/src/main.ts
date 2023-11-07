@@ -1,18 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { Logger } from 'nestjs-pino';
-
-process.env.NODE_ENV = 'production';
+import {init} from "./common/plugin-pino-logger";
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('/services/pino');
+  init(app);
 
-  //Ovverides default nest js logger if env != development
-  if (process.env.NODE_ENV !== 'development') {
-    const pinoLogger = app.get(Logger);
-    app.useLogger(pinoLogger);
-  }
 
   // app.useLogger(app.get(PinoLogger));
   //This creates a new instance of DocumentBuilder, which is used to define
