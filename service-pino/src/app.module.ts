@@ -28,23 +28,11 @@ if (process.env.NODE_ENV !== 'development') {
         serializers: {
           req: (req) => {
             return {
-              //Unique request id (that was generated in the apigtw) is set in
-              // the request headers
-              //we are fetching it from headers and setting it as trace id
-              //which will help us track the request as it propagates forward
-              trace_id: req.headers['x-trace-id'],
+              trace_id: req.headers['x-trace-id'] || 'no-trace-id-from-gtw',
             };
           },
         },
-        //Automatic pino logging of incoming http requests turned off
         autoLogging: false,
-
-        //Because we want the output to be written in json format to the log file,
-        //pino pretty has been turned off
-
-        // transport: {
-        //   target: 'pino-pretty',
-        // },
       },
     }),
   );
