@@ -14,6 +14,10 @@ if (process.env.NODE_ENV !== 'development') {
   array.push(
     LoggerModule.forRoot({
       pinoHttp: {
+        base: {
+          service: serviceName,
+        },
+        messageKey: 'message',
         customLogLevel: (res, err) => {
           if (res.statusCode >= 400 && res.statusCode < 500) return 'warn';
           if (res.statusCode >= 500 || err) return 'error';
