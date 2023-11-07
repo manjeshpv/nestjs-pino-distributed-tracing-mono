@@ -7,6 +7,9 @@ const array = [];
 
 //If env === development, uses nest js default logger
 //Else, pino logger overrides the default logger
+
+const { name: serviceName } = require('../package.json');
+
 if (process.env.NODE_ENV !== 'development') {
   array.push(
     LoggerModule.forRoot({
@@ -27,6 +30,7 @@ if (process.env.NODE_ENV !== 'development') {
               //which will help us track the request as it propagates forward
               trace_id: req.headers['x-trace-id'],
               date: new Date(),
+              service_name: serviceName,
             };
           },
         },
