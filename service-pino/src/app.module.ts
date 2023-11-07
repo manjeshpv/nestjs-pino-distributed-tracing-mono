@@ -33,8 +33,6 @@ if (process.env.NODE_ENV !== 'development') {
               //we are fetching it from headers and setting it as trace id
               //which will help us track the request as it propagates forward
               trace_id: req.headers['x-trace-id'],
-              date: new Date(),
-              service: serviceName,
             };
           },
         },
