@@ -1,11 +1,19 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
+
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import {init} from "./common/plugin-pino-logger";
+// import { init } from './common/plugin-pino-logger';
+// import {enableExceptionFilter} from "./common/plugin-sentry";
+import { Sentry } from './common/plugin-sentry';
+import { SentryFilter } from './common/sentry.filter';
+import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('/services/pino');
-  init(app);
+  // init(app);
+  // app.setGlobalPrefix('/services/pino');
+
+  Sentry.captureException(new Error('L14x'))
+  const { httpAdapter } = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new SentryFilter(httpAdapter));
 
 
   // app.useLogger(app.get(PinoLogger));

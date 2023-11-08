@@ -1,4 +1,4 @@
-import { Controller, Logger, Post, Headers, Get } from '@nestjs/common';
+import {Controller, Logger, Post, Headers, Get, HttpException} from '@nestjs/common';
 import { AppService } from './app.service';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -20,5 +20,11 @@ export class AppController {
     //console.log(headers);
     this.logger.log(new Date(), 'manjesh');
     return this.appService.getHello();
+  }
+
+  @Get('throw')
+  throwError(): string {
+    this.logger.error('Sample error by manjesh');
+    throw new HttpException({ message: 'Sample Error by service-pino' }, 500);
   }
 }
